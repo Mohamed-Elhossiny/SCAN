@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SCAN.Models;
+
 namespace SCAN
 {
     public class Program
@@ -8,6 +12,15 @@ namespace SCAN
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ScanContext>(
+                    option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddIdentity<ScanUser, IdentityRole>(
+                option =>
+                {
+                    option.Password.RequireNonAlphanumeric = false;
+                    option.Password.RequiredLength = 5;
+                }).AddEntityFrameworkStores<ScanContext>();
 
             var app = builder.Build();
 
