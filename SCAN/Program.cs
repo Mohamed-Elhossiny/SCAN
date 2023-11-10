@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SCAN.Models;
+using SCAN.Repositories.PatientRepository;
 
 namespace SCAN
 {
@@ -22,6 +23,9 @@ namespace SCAN
                     option.Password.RequiredLength = 5;
                 }).AddEntityFrameworkStores<ScanContext>();
 
+            builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -41,7 +45,7 @@ namespace SCAN
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Patient}/{action=CreateAppointment}/{id?}");
 
             app.Run();
         }

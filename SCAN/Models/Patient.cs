@@ -19,10 +19,14 @@ namespace SCAN.Models
         public string? Phone { get; set; }
         public int? Age { get; set; }
         public string? Gender { get; set; }
-        public string? Reference { get; set; }
+        public string? ReferenceName { get; set; }
+        public int ReferenceID { get; set; }
 
         public DateTime? BirthDate { get; set; }
         public DateTime? DateofAppointment { get; set; }
         public string? ScanImageUrl { get; set; }
+
+        public string? CheckTpye { get; set; }
+        public int? CheckTpyeID { get; set; }
     }
 }
