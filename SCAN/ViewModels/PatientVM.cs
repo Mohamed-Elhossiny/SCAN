@@ -1,4 +1,5 @@
-﻿using SCAN.Enums;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using SCAN.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.Xml;
 
@@ -36,16 +37,23 @@ namespace SCAN.ViewModels
         [Required(ErrorMessage = "Enter gender of the patient")]
         public string? Gender { get; set; }
 
-        public References Reference { get; set; }
+        //public References Reference { get; set; }
+        public int? ReferenceID { get; set; }
 
-        [Required(ErrorMessage = "Please choose appointment date")]
+		public IEnumerable<SelectListItem>? ReferenceList { get; set; }
+
+		[Required(ErrorMessage = "Please choose appointment date")]
         public DateTime? DateofAppointment { get; set; }
 
         [Required]
         public DateTime? BirthDate { get; set; }
 
-        public CheckType CheckType { get; set; }
-        public string? ScanImageUrl { get; set; }
+        //public CheckType CheckType { get; set; }
+        public int? CheckTypeID { get; set; }
+		public IEnumerable<SelectListItem>? CheckTypeList { get; set; }
+		public string? ScanImageUrl { get; set; }
+
+        public int? ResultID { get; set; }
 
     }
 }

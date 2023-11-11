@@ -1,3 +1,5 @@
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SCAN.Models;
@@ -23,7 +25,8 @@ namespace SCAN
                     option.Password.RequiredLength = 5;
                 }).AddEntityFrameworkStores<ScanContext>();
 
-            builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+			builder.Services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopCenter; });
+			builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 
 
             var app = builder.Build();
@@ -35,8 +38,8 @@ namespace SCAN
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
+			app.UseNotyf();
+			app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

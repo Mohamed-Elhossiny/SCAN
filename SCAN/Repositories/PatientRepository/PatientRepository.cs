@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using SCAN.Enums;
 using SCAN.Models;
 using SCAN.ViewModels;
@@ -30,12 +31,12 @@ namespace SCAN.Repositories.PatientRepository
                     Phone = patientVM.Phone,
                     Age = patientVM.Age,
                     Gender = patientVM.Gender,
-                    ReferenceName = patientVM.Reference.ToString(),
-                    ReferenceID = (int)patientVM.Reference,
+                    ReferenceName =Enum.GetName(typeof(References),patientVM.ReferenceID),
+                    ReferenceID = (int)patientVM.ReferenceID,
                     BirthDate = patientVM.BirthDate,
                     DateofAppointment = patientVM.DateofAppointment,
-                    CheckTpye = patientVM.CheckType.ToString(),
-                    CheckTpyeID = (int)patientVM.CheckType
+                    CheckTpye =Enum.GetName(typeof(CheckType),patientVM.CheckTypeID),
+                    CheckTpyeID = (int)patientVM.CheckTypeID
                 };
                  _context.AddAsync(patient);
                 _context.SaveChanges();
@@ -63,10 +64,10 @@ namespace SCAN.Repositories.PatientRepository
                         Phone = patient.Phone,
                         Age = patient.Age != null ? (int)patient.Age : 0,
                         Gender = patient.Gender,
-                        Reference = (References)patient.ReferenceID,
+                        ReferenceID = patient.ReferenceID,
                         BirthDate = patient.BirthDate,
                         DateofAppointment = patient.DateofAppointment,
-                        CheckType = (CheckType)patient.CheckTpyeID,
+                        CheckTypeID = patient.CheckTpyeID,
                         ScanImageUrl = patient.ScanImageUrl
                     });
                 }
@@ -91,15 +92,40 @@ namespace SCAN.Repositories.PatientRepository
                     Phone = patientdb.Phone,
                     Age = patientdb.Age != null ? (int)patientdb.Age : 0,
                     Gender = patientdb.Gender,
-                    Reference = (References)patientdb.ReferenceID,
+                    ReferenceID = patientdb.ReferenceID,
                     BirthDate = patientdb.BirthDate,
                     DateofAppointment = patientdb.DateofAppointment,
-                    CheckType = (CheckType)patientdb.CheckTpyeID,
+                    CheckTypeID = patientdb.CheckTpyeID,
                     ScanImageUrl = patientdb.ScanImageUrl
                 };
                 return patientVM;
             }
             return new PatientVM();
         }
-    }
+
+        public IEnumerable<SelectListItem> GetReferenceList()
+        {
+            var referenceList = Enum.GetValues(typeof(References))
+                           .Cast<References>()
+                           .Select(r => new SelectListItem
+                           {
+                               Value = ((int)r).ToString(),
+                               Text = r.ToString()
+                           });
+            return referenceList;
+
+		}
+		public IEnumerable<SelectListItem> GetCheckTypeList()
+		{
+			var checktype = Enum.GetValues(typeof(CheckType))
+				.Cast<CheckType>()
+				.Select(c => new SelectListItem
+				{
+					Value = ((int)c).ToString(),
+					Text = c.ToString()
+				});
+			return checktype;
+
+		}
+	}
 }

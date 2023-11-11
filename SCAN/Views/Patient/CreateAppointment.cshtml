@@ -1,103 +1,210 @@
 ﻿@model SCAN.ViewModels.PatientVM
 
 @{
-    ViewData["Title"] = "CreateAppointment";
+	ViewData["Title"] = "CreateAppointment";
 }
 
-<h1>CreateAppointment</h1>
+@if (TempData["ResultID"] == "1")
+{
+	<div class="alert alert-success">@TempData["successMessage"]</div>
+}
 
-<h4>PatientVM</h4>
+@if (TempData["ResultID"] == "0")
+{
+	<div class="alert alert-danger">@TempData["alertMessage"]</div>
+}
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateAppointment">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PatinetID" class="control-label"></label>
-                <input asp-for="PatinetID" class="form-control" />
-                <span asp-validation-for="PatinetID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ArabicFirstName" class="control-label"></label>
-                <input asp-for="ArabicFirstName" class="form-control" />
-                <span asp-validation-for="ArabicFirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ArabicLastName" class="control-label"></label>
-                <input asp-for="ArabicLastName" class="form-control" />
-                <span asp-validation-for="ArabicLastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Government" class="control-label"></label>
-                <input asp-for="Government" class="form-control" />
-                <span asp-validation-for="Government" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Reference" class="control-label"></label>
-                <input asp-for="Reference" class="form-control" />
-                <span asp-validation-for="Reference" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateofAppointment" class="control-label"></label>
-                <input asp-for="DateofAppointment" class="form-control" />
-                <span asp-validation-for="DateofAppointment" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CheckType" class="control-label"></label>
-                <input asp-for="CheckType" class="form-control" />
-                <span asp-validation-for="CheckType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ScanImageUrl" class="control-label"></label>
-                <input asp-for="ScanImageUrl" class="form-control" />
-                <span asp-validation-for="ScanImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<div class="content-wrapper">
+	<!-- Content -->
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Scan /</span> Create Appointment</h4>
+		<form asp-action="CreateAppointment" method="post" asp-controller="Patient">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="row">
+				<!-- Basic -->
+				<div class="col-md-6">
+					<div class="card mb-4">
+						<h5 class="card-header">Personal Information</h5>
+						<div class="card-body demo-vertical-spacing demo-only-element">
 
-<div>
-    <a asp-action="Index">Back to List</a>
+							<div class="input-group">
+								<label class="form-label">First Name</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="FirstName" />
+								</div>
+								<span asp-validation-for="FirstName" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Last Name</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="LastName" />
+								</div>
+								<span asp-validation-for="LastName" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Arabic First Name</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="ArabicFirstName" />
+								</div>
+								<span asp-validation-for="ArabicFirstName" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Arabic Last Name</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="ArabicLastName" />
+								</div>
+								<span asp-validation-for="ArabicLastName" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">City</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="City" />
+								</div>
+								<span asp-validation-for="City" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Government</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="Government" />
+								</div>
+								<span asp-validation-for="Government" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Age</label>
+								<div class="input-group">
+									<input class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="Age" />
+								</div>
+								<span asp-validation-for="Age" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Gender</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="Gender" />
+								</div>
+								<span asp-validation-for="Gender" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Phone</label>
+								<div class="input-group">
+									<input type="text"
+										   class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="Phone" />
+								</div>
+								<span asp-validation-for="Phone" class="text-danger"></span>
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Date of Birth</label>
+								<div class="input-group">
+									<input class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="BirthDate" />
+								</div>
+								<span asp-validation-for="BirthDate" class="text-danger"></span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<!-- Merged -->
+				<div class="col-md-6">
+					<div class="card mb-4">
+						<h5 class="card-header">Appointment</h5>
+						<div class="card-body demo-vertical-spacing demo-only-element">
+							<div class="input-group">
+								<select asp-for="ReferenceID" asp-items="Model.ReferenceList" class="form-control">
+									<option value="">-- Select Reference --</option>
+								</select>
+								@* @Html.DropDownListFor(model => model.ReferenceID, Model.ReferenceList, "Select Reference" , new {@class = "form-control"} ) *@
+							</div>
+
+							<div class="input-group">
+								<select asp-for="CheckTypeID" asp-items="Model.CheckTypeList" class="form-control">
+									<option value="">-- Select Check Type --</option>
+								</select>
+								@* @Html.DropDownListFor(model=>model.CheckTypeID,Model.CheckTypeList,"Select Check type",new {@class="form-control"}) *@
+							</div>
+
+							<div class="input-group">
+								<label class="form-label">Date of Appointment</label>
+								<div class="input-group">
+									<input class="form-control"
+										   placeholder="Firstname"
+										   aria-label="Username"
+										   aria-describedby="basic-addon11"
+										   asp-for="DateofAppointment" />
+								</div>
+								<span asp-validation-for="DateofAppointment" class="text-danger"></span>
+							</div>
+
+							<div class="btn-group">
+								<input type="submit" value="Create" class="btn btn-primary me-3" />
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
