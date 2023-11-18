@@ -28,5 +28,9 @@ namespace SCAN.Models
 
         public string? CheckTpye { get; set; }
         public int? CheckTpyeID { get; set; }
+
+        [ForeignKey("Scan")]
+        public int Scan_ID { get; set; }
+        public virtual Scan? Scan { get; set; }
     }
 }

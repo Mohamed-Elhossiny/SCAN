@@ -55,5 +55,9 @@ namespace SCAN.ViewModels
 
         public int? ResultID { get; set; }
 
-    }
+        [Required(ErrorMessage = "Please Choose Type of Scan")]
+		public int Scan_ID { get; set; }
+		public string? ScanName { get; set; }
+
+	}
 }

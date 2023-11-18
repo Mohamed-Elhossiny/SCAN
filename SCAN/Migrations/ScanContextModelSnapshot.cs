@@ -216,6 +216,22 @@ namespace SCAN.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("SCAN.Models.Scan", b =>
+                {
+                    b.Property<int>("ScanID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScanID"));
+
+                    b.Property<string>("ScanName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ScanID");
+
+                    b.ToTable("Scans");
+                });
+
             modelBuilder.Entity("SCAN.Models.ScanUser", b =>
                 {
                     b.Property<string>("Id")

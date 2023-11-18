@@ -8,6 +8,7 @@ namespace SCAN.Models
         public ScanContext() { }
         public ScanContext(DbContextOptions<ScanContext> option) :base(option) { }
         public virtual DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<Scan> Scans { get; set; }
 
     }
 }

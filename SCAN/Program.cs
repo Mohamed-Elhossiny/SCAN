@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SCAN.Models;
 using SCAN.Repositories.PatientRepository;
+using SCAN.Repositories.ScanRepository;
 
 namespace SCAN
 {
@@ -27,6 +28,7 @@ namespace SCAN
 
 			builder.Services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopCenter; });
 			builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+			builder.Services.AddScoped<IScanRepository, ScanRepository>();
 
 
             var app = builder.Build();

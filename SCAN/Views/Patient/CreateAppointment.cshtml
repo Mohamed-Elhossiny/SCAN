@@ -2,17 +2,9 @@
 
 @{
 	ViewData["Title"] = "CreateAppointment";
+	SelectList scanTypes = new SelectList(ViewBag.ScanTypes, "ScanID", "ScanName");
 }
 
-@if (TempData["ResultID"] == "1")
-{
-	<div class="alert alert-success">@TempData["successMessage"]</div>
-}
-
-@if (TempData["ResultID"] == "0")
-{
-	<div class="alert alert-danger">@TempData["alertMessage"]</div>
-}
 
 <hr />
 <div class="content-wrapper">
@@ -160,23 +152,26 @@
 					</div>
 				</div>
 
-				<!-- Merged -->
 				<div class="col-md-6">
 					<div class="card mb-4">
 						<h5 class="card-header">Appointment</h5>
 						<div class="card-body demo-vertical-spacing demo-only-element">
 							<div class="input-group">
+								<select name="Scan_ID" asp-items="scanTypes" class="form-control">
+									<option value=""> -- Select Scan Type -- </option>
+								</select>
+							</div>
+							<span asp-validation-for="Scan_ID" class="text-danger"></span>
+							<div class="input-group">
 								<select asp-for="ReferenceID" asp-items="Model.ReferenceList" class="form-control">
 									<option value="">-- Select Reference --</option>
 								</select>
-								@* @Html.DropDownListFor(model => model.ReferenceID, Model.ReferenceList, "Select Reference" , new {@class = "form-control"} ) *@
 							</div>
 
 							<div class="input-group">
 								<select asp-for="CheckTypeID" asp-items="Model.CheckTypeList" class="form-control">
 									<option value="">-- Select Check Type --</option>
 								</select>
-								@* @Html.DropDownListFor(model=>model.CheckTypeID,Model.CheckTypeList,"Select Check type",new {@class="form-control"}) *@
 							</div>
 
 							<div class="input-group">
